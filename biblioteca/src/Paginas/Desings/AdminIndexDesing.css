@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/* Contenedor principal de la página */
+.index-container {
+  min-height: 100vh;
+  display: flex;
+  margin-top: -100px;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background: rgba(255, 255, 255, 0); /* Agrega una capa blanca semitransparente */
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Contenedor principal */
+.admin-index-container {
+  padding: 3rem;
+  margin: 120px auto;
+  max-width: 1200px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease-in-out;
+}
+
+.admin-index-container:hover {
+  transform: scale(1.01);
+}
+
+/* Bienvenida */
+.admin-welcome {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 2rem;
+}
+
+/* Contenedor de la tabla */
+.admin-table-container {
+  background: #ffffff;
+  border-radius: 25px;
+  padding: 2rem;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease-in-out;
+}
+
+.admin-table-container:hover {
+  transform: scale(1.01);
+}
+
+/* Título de la tabla */
+.admin-table-container h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+}
+
+/* Tabla */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  color: black;
+}
+
+.admin-table th {
+  background: #3498db;
+  color: white;
+  font-weight: 600;
+}
+
+.admin-table tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+.admin-table tr:hover {
+  background: #f1f1f1;
+}
+
+/* Botones */
+.edit-button,
+.delete-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.edit-button {
+  background: #2ecc71;
+  color: white;
+}
+
+.edit-button:hover {
+  background: #27ae60;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0px 5px 15px rgba(39, 174, 96, 0.4);
+}
+
+.delete-button {
+  background: #e74c3c;
+  color: white;
+}
+
+.delete-button:hover {
+  background: #c0392b;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0px 5px 15px rgba(192, 57, 43, 0.4);
+}
+
+/* Mensaje de no hay libros */
+.no-books-message {
+  text-align:left;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #7f8c8d;
+  margin-top: 2rem;
+  font-family: 'Poppins', sans-serif;
+    padding: 1rem;
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 825px) {
+  .admin-table-container {
+    padding: 1rem;
+  }
+
+  .admin-table {
+    display: block;
+    overflow-x: auto; /* Permitir desplazamiento horizontal */
+    white-space: nowrap; /* Evitar que las celdas se ajusten automáticamente */
+  }
+
+  .admin-table th,
+  .admin-table td {
+    font-size: 0.9rem; /* Reducir el tamaño de fuente */
+    padding: 0.5rem;
+  }
+
+  .admin-table th {
+    text-align: left;
+  }
+
+  .edit-button,
+  .delete-button {
+    font-size: 0.8rem; /* Reducir el tamaño de los botones */
+    padding: 0.4rem 0.8rem;
+  }
+
+  .admin-welcome {
+    font-size: 2rem; /* Reducir el tamaño del texto de bienvenida */
+  }
+
+  .admin-table-container h2 {
+    font-size: 2rem; /* Reducir el tamaño del título */
+  }
+}
+
+/* Responsividad para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .admin-table-container {
+    padding: 0.5rem;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    font-size: 0.8rem; /* Reducir aún más el tamaño de fuente */
+    padding: 0.3rem;
+  }
+
+  .edit-button,
+  .delete-button {
+    font-size: 0.7rem; /* Reducir aún más el tamaño de los botones */
+    padding: 0.3rem 0.6rem;
+  }
+
+  .admin-welcome {
+    font-size: 1.5rem; /* Reducir el tamaño del texto de bienvenida */
+  }
+
+  .admin-table-container h2 {
+    font-size: 1.5rem; /* Reducir el tamaño del título */
+  }
+  .book-image {
+    width: 100px;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+}

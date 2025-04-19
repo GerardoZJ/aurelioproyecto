@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap'); /* Importar fuente moderna con más pesos */
+
+/* Contenedor principal */
+.agregar-libro-container {
+  background: #ffffff;
+  border-radius: 25px;
+  padding: 3rem;
+  margin: 120px auto;
+  width: 90%;
+  max-width: 800px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease-in-out;
+}
+
+.agregar-libro-container:hover {
+  transform: scale(1.01);
+}
+
+.agregar-libro-container h2 {
+  color: #2c3e50; /* Cambiar a un color más moderno */
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 3rem; /* Aumentar ligeramente el tamaño */
+  font-weight: 700; /* Usar un peso más grueso para destacar */
+  font-family: 'Poppins', sans-serif; /* Aplicar la fuente moderna */
+  letter-spacing: 1px; /* Añadir espaciado entre letras */
+  line-height: 1.2; /* Mejorar la legibilidad */
+}
+
+.agregar-libro-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  font-family: 'Poppins', sans-serif; /* Aplicar la fuente moderna */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+  color: #34495e;
+  font-weight: bold;
+}
+
+.form-group input {
+  padding: 1.2rem;
+  border: 2px solid #bdc3c7;
+  border-radius: 15px;
+  font-size: 1.3rem;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus {
+  border-color: #3498db;
+  box-shadow: 0px 0px 12px rgba(52, 152, 219, 0.5);
+}
+
+.agregar-libro-form button {
+  padding: 1.2rem;
+  background: #3498db;
+  border: none;
+  color: white;
+  font-size: 1.4rem;
+  font-weight: bold;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  display: block;
+  width: 100%;
+  font-family: 'Poppins', sans-serif; /* Aplicar la fuente moderna */
+}
+
+.agregar-libro-form button:hover {
+  background: #2980b9;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0px 5px 15px rgba(41, 128, 185, 0.4);
+}
+
+.book-image {
+  width: 150px;
+  height: auto;
+  margin-top: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsivo para tablets */
+@media (max-width: 768px) {
+  .agregar-libro-container {
+    padding: 2rem;
+    margin: 80px auto;
+  }
+
+  .agregar-libro-container h2 {
+    font-size: 2.2rem;
+  }
+
+  .form-group label {
+    font-size: 1.2rem;
+  }
+
+  .form-group input {
+    padding: 1rem;
+    font-size: 1.1rem;
+  }
+
+  .agregar-libro-form button {
+    font-size: 1.2rem;
+    padding: 1rem;
+  }
+
+  .book-image {
+    width: 120px;
+  }
+}
+
+/* Responsivo para móviles */
+@media (max-width: 480px) {
+  .agregar-libro-container {
+    padding: 1.5rem;
+    margin: 60px auto;
+  }
+
+  .agregar-libro-container h2 {
+    font-size: 1.8rem;
+  }
+
+  .form-group label {
+    font-size: 1rem;
+  }
+
+  .form-group input {
+    padding: 0.8rem;
+    font-size: 1rem;
+  }
+
+  .agregar-libro-form button {
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+
+  .book-image {
+    width: 100px;
+  }
+}
+
+/* Mejoras de accesibilidad y usabilidad */
+@media (max-width: 400px) {
+  .agregar-libro-container {
+    margin-top: 50px;
+  }
+
+  .form-group input {
+    font-size: 1rem;
+  }
+
+  .agregar-libro-form button {
+    font-size: 1rem;
+    padding: 1rem;
+  }
+}

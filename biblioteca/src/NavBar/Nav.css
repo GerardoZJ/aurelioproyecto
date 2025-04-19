@@ -1,0 +1,126 @@
+/* Navbar general */
+.navbar {
+  background: linear-gradient(135deg, #0052cc, #003399);
+  padding: 15px 0;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+
+}
+
+.navbar.open {
+  background: rgba(0, 50, 150, 0.9);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Logo */
+.logo img {
+  height: 50px;
+}
+
+/* Botón del menú en móviles */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Lista de navegación */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  transition: transform 0.3s ease;
+}
+
+/* Animaciones para cada li */
+.nav-links li {
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+/* Efecto hover */
+.nav-links li:hover {
+  transform: scale(1.1);
+}
+
+/* Efecto al hacer clic (activo) */
+.nav-links li.active {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.15);
+  border-radius: 5px;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+/* Enlaces */
+.nav-links a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 15px;
+  transition: color 0.3s ease, background 0.3s ease;
+  border-radius: 5px;
+}
+
+/* Hover en enlaces */
+.nav-links a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Estilo para el ícono de cerrar sesión */
+.logout-icon {
+  color: #ffffff; /* Color blanco */
+  font-size: 20px; /* Tamaño del ícono */
+  cursor: pointer; /* Cambiar el cursor al pasar sobre el ícono */
+  transition: color 0.3s ease;
+}
+
+.logout-icon:hover {
+  color: rgba(255, 255, 255, 0.7); /* Cambiar a un blanco más tenue al pasar el mouse */
+}
+
+/* Estilo para enlaces deshabilitados */
+.nav-links .disabled {
+  pointer-events: none; /* Deshabilitar clics */
+  opacity: 0.5; /* Reducir opacidad */
+  cursor: not-allowed; /* Cambiar el cursor */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .menu-toggle {
+      display: block;
+  }
+
+  .nav-links {
+      flex-direction: column;
+      position: absolute;
+      top: 70px;
+      right: 0;
+      background: rgba(0, 50, 150, 0.9);
+      width: 200px;
+      padding: 10px;
+      display: none;
+      border-radius: 5px;
+  }
+
+  .nav-links.active {
+      display: flex;
+  }
+}

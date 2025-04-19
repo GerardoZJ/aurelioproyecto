@@ -1,0 +1,145 @@
+/* DevolverDesing.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/* Contenedor principal */
+.devolver-container {
+  background: #f8f8f8;
+  border-radius: 8px;
+  padding: 2rem;
+  margin: 120px auto 2rem auto;
+  width: 95%;
+  max-width: 800px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Título */
+.devolver-container h2 {
+  color: #222;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2.8rem;
+  font-weight: 700;
+}
+
+/* Contenedor de lista */
+.devolver-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Ítem de la devolución */
+.devolver-item {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fff;
+  align-items: center;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Información de la izquierda */
+.info-left {
+  flex-shrink: 0;
+}
+
+/* Imagen del producto */
+.devolver-img {
+  width: 150px;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Información de la derecha */
+.info-right {
+  font-size: 1.4rem;
+  color: #555;
+  flex-grow: 1;
+}
+
+.info-right p {
+  margin: 0.4rem 0;
+}
+
+/* Botón de acción */
+.info-right button {
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #009933;
+  color: #fff;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Efecto hover en el botón */
+.info-right button:hover {
+  background-color: #00802b;
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 825px) {
+  .devolver-container {
+    padding: 1rem;
+  }
+
+  .devolver-list {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .devolver-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .info-right {
+    font-size: 1.2rem;
+    padding: 0.8rem;
+  }
+
+  .info-right button {
+    font-size: 1.2rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .devolver-container h2 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Responsividad para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .devolver-container {
+    padding: 0.5rem;
+  }
+
+  .devolver-img {
+    width: 120px;
+    height: auto;
+  }
+
+  .devolver-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .info-right {
+    font-size: 1.1rem;
+    padding: 0.6rem;
+  }
+
+  .info-right button {
+    font-size: 1rem;
+    padding: 0.5rem 0.8rem;
+  }
+
+  .devolver-container h2 {
+    font-size: 2rem;
+  }
+}

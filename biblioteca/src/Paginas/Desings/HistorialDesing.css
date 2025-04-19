@@ -1,0 +1,60 @@
+.historial-container {
+  background: #fdfdfd;
+  border-radius: 8px;
+  padding: 2rem;
+  margin: 120px auto 2rem auto;
+  width: 95%;
+  max-width: 800px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.historial-container h2 {
+  color: #222;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2.8rem;
+}
+
+.historial-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.historial-item {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.info-left {
+  flex-shrink: 0;
+}
+
+.historial-img {
+  width: 150px;
+  height: auto;
+  border-radius: 4px;
+}
+
+.info-right {
+  font-size: 1.4rem;
+  color: #555;
+}
+
+.info-right p {
+  margin: 0.4rem 0;
+}
+
+.devuelto {
+  color: green;
+  font-weight: bold;
+}
+
+.pendiente {
+  color: red;
+  font-weight: bold;
+}

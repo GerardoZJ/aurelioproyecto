@@ -1,0 +1,206 @@
+.login-page-wrapper {
+  position: relative; /* Cambiado de fixed a relative para permitir scroll completo */
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh; /* Asegura que el contenedor ocupe al menos toda la altura de la ventana */
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  flex-direction: column; /* Apila los elementos verticalmente */
+  z-index: 1000;
+  overflow-y: auto; /* Agrega scroll si el contenido no cabe */
+  overflow-x: hidden; /* Evita el scroll horizontal */
+  background: linear-gradient(135deg, #4facfe, #00f2fe); /* Fondo degradado */
+  font-family: 'Arial', sans-serif; /* Fuente moderna */
+  padding: 2rem; /* Espaciado para pantallas pequeñas */
+  box-sizing: border-box; /* Incluye el padding en el ancho total */
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ajusta la imagen al contenedor */
+  opacity: 0.5; /* Transparencia para resaltar el contenido */
+  z-index: -1; /* Envía la imagen al fondo */
+}
+
+.login-background-box {
+  position: absolute; /* Posiciona el recuadro detrás del contenido */
+  top: 50%; /* Centra verticalmente */
+  left: 50%; /* Centra horizontalmente */
+  transform: translate(-50%, -50%); /* Ajusta el centrado */
+  width: 95%; /* Aumenta el ancho del recuadro */
+  max-width: 1000px; /* Aumenta el ancho máximo */
+  min-height: 200px; /* Aumenta la altura mínima */
+  padding: 3rem; /* Aumenta el espaciado interno */
+  background: rgba(0, 0, 0, 0.2); /* Fondo negro semitransparente */
+  border-radius: 15px; /* Bordes redondeados */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada */
+  z-index: 1; /* Asegura que esté encima del fondo pero detrás del contenido */
+}
+
+/* Estilos generales */
+.login-box {
+  position: relative; /* Asegura que el contenido esté encima del recuadro */
+  z-index: 2; /* Asegura que el contenido esté encima del recuadro transparente */
+  display: flex; /* Activa Flexbox */
+  flex-direction: column; /* Apila los elementos verticalmente */
+  align-items: center; /* Centra los elementos horizontalmente */
+  justify-content: center; /* Centra los elementos verticalmente */
+  height: 100%; /* Asegura que ocupe toda la altura del contenedor */
+}
+
+.login-form {
+  background: rgba(255, 255, 255, 0.9); /* Fondo blanco semitransparente */
+  padding: 3rem; /* Aumenta el relleno interno */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
+  text-align: center;
+  width: 100%;
+  max-width: 600px; /* Aumenta el ancho máximo */
+}
+
+.login-form input,
+.login-form button {
+  width: 80%; /* Mismo ancho para inputs y botón */
+  padding: .5rem;
+  margin: 0.8rem 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease; /* Transición suave */
+}
+
+.login-form input:focus {
+  border-color: #4facfe; /* Color de borde al enfocar */
+  outline: none;
+}
+
+.login-form button {
+  background: #4facfe;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease; /* Transición suave */
+}
+
+.login-form button:hover {
+  background: #00c6ff; /* Color al pasar el mouse */
+}
+
+.login-title {
+  font-size: 2rem; /* Tamaño de fuente más grande */
+  margin-left: 65px;
+  font-weight: bold; /* Texto en negrita */
+  color: #000000; /* Color principal */
+  margin-bottom: 1.5rem; /* Espaciado inferior */
+  text-transform: uppercase; /* Texto en mayúsculas */
+  letter-spacing: 1.5px; /* Espaciado entre letras */
+  text-align: center; /* Centrar el texto */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
+}
+
+.login-logo {
+  width: 150px; /* Ajusta el tamaño del logo */
+  height: auto; /* Mantén la proporción del logo */
+  margin-bottom: 1.5rem; /* Espaciado inferior */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+}
+
+.login-logo:hover {
+  transform: scale(1.1); /* Efecto de zoom al pasar el mouse */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada al pasar el mouse */
+}
+
+/* Estilos responsivos */
+@media (max-width: 1024px) {
+  .login-background-box {
+    width: 90%; /* Reduce el ancho del recuadro */
+    max-width: 900px; /* Ajusta el ancho máximo */
+    min-height: 500px; /* Ajusta la altura mínima */
+  }
+
+  .login-logo {
+    width: 130px; /* Reduce el tamaño del logo */
+    margin-bottom: 1rem; /* Reduce el espaciado inferior */
+  }
+
+  .login-form {
+    padding: 2rem; /* Reduce el relleno interno */
+    max-width: 500px; /* Ajusta el ancho máximo */
+  }
+
+  .login-title {
+    font-size: 1.8rem; /* Reduce el tamaño de la fuente */
+    margin-left: 0; /* Centra el título */
+  }
+
+  .login-logo {
+    margin-left: auto;
+    margin-right: auto; /* Centra el logo */
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .login-background-box {
+    width: 95%; /* Ajusta el ancho al 95% del contenedor */
+    max-width: 700px; /* Ajusta el ancho máximo */
+    min-height: 450px; /* Ajusta la altura mínima */
+  }
+
+  .login-logo {
+    width: 120px; /* Reduce aún más el tamaño del logo */
+  }
+
+  .login-form {
+    padding: 1.5rem; /* Reduce aún más el relleno interno */
+    width: 90%; /* Ajusta el ancho al 90% del contenedor */
+  }
+
+  .login-title {
+    font-size: 1.5rem; /* Reduce el tamaño de la fuente */
+    letter-spacing: 1px; /* Reduce el espaciado entre letras */
+  }
+
+  .login-form input,
+  .login-form button {
+    width: 100%; /* Inputs y botón ocupan todo el ancho */
+  }
+}
+
+@media (max-width: 480px) {
+  .login-page-wrapper {
+    padding: 1rem; /* Agrega un poco de espacio interno */
+  }
+
+  .login-background-box {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    max-width: none; /* Sin límite de ancho */
+    min-height: 400px; /* Ajusta la altura mínima */
+    padding: 1rem; /* Reduce el espaciado interno */
+  }
+
+  .login-title {
+    font-size: 1.2rem; /* Reduce aún más el tamaño de la fuente */
+  }
+
+  .login-logo {
+    width: 100px; /* Reduce el tamaño del logo */
+  }
+
+  .login-form {
+    padding: 1.3rem; /* Reduce el relleno interno */
+  }
+
+  .login-form input,
+  .login-form button {
+    font-size: 0.9rem; /* Reduce el tamaño de la fuente */
+  }
+}

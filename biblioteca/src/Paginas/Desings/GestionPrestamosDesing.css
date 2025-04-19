@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/* Contenedor principal */
+.gestion-prestamos-container {
+  padding: 3rem;
+  margin: 120px auto;
+  max-width: 1200px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease-in-out;
+}
+
+.gestion-prestamos-container:hover {
+  transform: scale(1.01);
+}
+
+/* Título */
+.gestion-prestamos-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #bebebe;
+  margin-bottom: 2rem;
+}
+
+/* Contenedor de la tabla */
+.gestion-prestamos-table-container {
+  background: #ffffff;
+  border-radius: 25px;
+  padding: 2rem;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease-in-out;
+}
+
+.gestion-prestamos-table-container:hover {
+  transform: scale(1.01);
+}
+
+/* Tabla */
+.gestion-prestamos-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.gestion-prestamos-table th,
+.gestion-prestamos-table td {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  color: #000000; /* Cambiado a negro */
+}
+
+.gestion-prestamos-table th {
+  background: #3498db;
+  color: #ffffff; /* Texto blanco para contraste */
+  font-weight: 600;
+}
+
+.gestion-prestamos-table tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+.gestion-prestamos-table tr:hover {
+  background: #f1f1f1;
+}
+
+/* Mensaje de no hay registros */
+.no-prestamos-message {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #000000; /* Cambiado a negro */
+  margin-top: 2rem;
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 825px) {
+  .gestion-prestamos-table-container {
+    padding: 1rem;
+  }
+
+  .gestion-prestamos-table {
+    display: block;
+    overflow-x: auto; /* Permitir desplazamiento horizontal */
+    white-space: nowrap; /* Evitar que las celdas se ajusten automáticamente */
+  }
+
+  .gestion-prestamos-table th,
+  .gestion-prestamos-table td {
+    font-size: 0.9rem; /* Reducir el tamaño de fuente */
+    padding: 0.5rem;
+    color: #000000; /* Cambiado a negro */
+  }
+
+  .gestion-prestamos-title {
+    font-size: 2rem; /* Reducir el tamaño del título */
+    color: #000000; /* Cambiado a negro */
+  }
+
+  .no-prestamos-message {
+    font-size: 1.2rem; /* Reducir el tamaño del mensaje */
+    color: #000000; /* Cambiado a negro */
+  }
+}

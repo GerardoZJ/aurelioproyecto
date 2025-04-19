@@ -1,0 +1,90 @@
+/* Fondo con imagen azul */
+body {
+  background: url('/src/Assets/12.png') no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+}
+
+/* Contenedor principal */
+.productos-mas-vistos {
+  padding: 7rem 2rem 3rem;
+  text-align: center;
+}
+
+/* Título */
+.productos-mas-vistos h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: white;
+}
+
+/* Grid de tarjetas en 3 columnas */
+.productos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  justify-items: center;
+}
+
+/* Tarjetas transparentes con sombra */
+.tarjeta-libro {
+  background: rgba(255, 255, 255, 0.08); /* transparente */
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  color: white;
+  transition: transform 0.3s ease-in-out;
+  width: 100%;
+  max-width: 300px;
+}
+
+/* Animación al pasar el cursor */
+.tarjeta-libro:hover {
+  transform: translateY(-5px);
+}
+
+/* Imagen del libro */
+.imagen-libro {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  border-radius: 10px;
+  background-color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+/* Detalles del libro */
+.detalles-libro h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+}
+
+.detalles-libro p {
+  margin: 0.3rem 0;
+  font-size: 1rem;
+  color: #e0e0e0;
+}
+
+.detalles-libro p strong {
+  color: #ffffff;
+}
+
+/* Responsivo: 2 columnas */
+@media (max-width: 1024px) {
+  .productos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Responsivo: 1 columna */
+@media (max-width: 768px) {
+  .productos-grid {
+    grid-template-columns: 1fr;
+  }
+}

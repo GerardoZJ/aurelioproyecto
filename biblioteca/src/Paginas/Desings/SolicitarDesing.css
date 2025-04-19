@@ -1,0 +1,186 @@
+/* Importación de la fuente Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/* Contenedor principal: Más grande y separado del navbar */
+.solicitar-container {
+  background: #ffffff;
+  border-radius: 25px;
+  padding: 3rem;
+  margin: 120px auto; /* Más separación del navbar */
+  width: 90%;
+  max-width: 1200px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease-in-out;
+}
+
+.solicitar-container:hover {
+  transform: scale(1.01);
+}
+
+.solicitar-container h2 {
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2.8rem;
+  font-weight: bold;
+}
+
+/* Formulario */
+.solicitar-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Campos de entrada */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+  color: #34495e;
+  font-weight: bold;
+}
+
+.form-group input {
+  padding: 1.2rem;
+  border: 2px solid #bdc3c7;
+  border-radius: 15px;
+  font-size: 1.3rem;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus {
+  border-color: #3498db;
+  box-shadow: 0px 0px 12px rgba(52, 152, 219, 0.5);
+}
+
+/* Buscador */
+.search-box {
+  position: relative;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 1.2rem;
+  border: 2px solid #bdc3c7;
+  border-radius: 15px;
+  font-size: 1.3rem;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.search-box input:focus {
+  border-color: #3498db;
+}
+
+/* Lista de libros sugeridos con imagen */
+.suggestions {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #bdc3c7;
+  border-top: none;
+  max-height: 400px;
+  overflow-y: auto;
+  z-index: 100;
+  border-radius: 15px;
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.suggestions .book-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  gap: 1rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.suggestions .book-item:hover {
+  background: #ecf0f1;
+  transform: scale(1.03);
+}
+
+.suggestions img {
+  width: 60px;
+  height: 80px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.suggestions .book-info {
+  flex-grow: 1;
+}
+
+.suggestions .book-info h4 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #2c3e50;
+  font-weight: bold;
+}
+
+.suggestions .book-info p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #7f8c8d;
+}
+
+/* Botón de envío */
+button {
+  padding: 1.2rem 2rem;
+  background-color: #3498db;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+button:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+/* Detalles del libro seleccionado */
+.book-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.book-detail .book-info h3 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.book-detail img {
+  max-width: 100%;
+  border-radius: 15px;
+  margin-top: 1rem;
+}
+/* Estilo para los campos de Autor, ISBN y Disponibles */
+.book-detail .book-info p {
+  color: #000000; /* Cambiar a negro */
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* Para los títulos dentro de la información del libro, como 'Autor' o 'ISBN' */
+.book-detail .book-info h4 {
+  color: #000000; /* Cambiar a negro */
+  font-weight: bold;
+}
