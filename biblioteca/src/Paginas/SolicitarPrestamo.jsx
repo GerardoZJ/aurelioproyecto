@@ -1,9 +1,11 @@
+// SolicitarPrestamo.jsx
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Desings/SolicitarDesing.css';
 
 export const SolicitarPrestamo = () => {
+  const API = 'http://localhost:5000';
   const [books, setBooks] = useState([]);
   const [search, setSearch] = useState('');
   const [filteredBooks, setFilteredBooks] = useState([]);
@@ -11,40 +13,29 @@ export const SolicitarPrestamo = () => {
   const [matricula, setMatricula] = useState('');
   const [cantidadSolicitada, setCantidadSolicitada] = useState(1);
   const [fechaDevolucion, setFechaDevolucion] = useState('');
-
   const navigate = useNavigate();
   const location = useLocation();
 
   // Obtener matrícula
   useEffect(() => {
-    const storedMatricula = localStorage.getItem('matricula');
-    if (!storedMatricula) {
+    const m = localStorage.getItem('matricula');
+    if (!m) {
       alert('Por favor, inicia sesión para solicitar un préstamo.');
       navigate('/LoginAlum');
     } else {
-      setMatricula(storedMatricula);
+      setMatricula(m);
     }
   }, [navigate]);
 
-  // Obtener libros
+  // Cargar libros
   useEffect(() => {
-    const fetchBooks = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/libros');
-        if (response.ok) {
-          const data = await response.json();
-          setBooks(data);
-        } else {
-          console.error('Error al obtener los libros:', response.statusText);
-        }
-      } catch (error) {
-        console.error('Error al conectar con el servidor:', error);
-      }
-    };
-    fetchBooks();
+    fetch(`${API}/libros`)
+      .then(r => r.json())
+      .then(setBooks)
+      .catch(err => console.error('Error libros:', err));
   }, []);
 
-  // Cargar libro si se pasó desde otra página
+  // Preselección si viene de otra ruta
   useEffect(() => {
     if (location.state?.libro) {
       setSelectedBook(location.state.libro);
@@ -52,91 +43,106 @@ export const SolicitarPrestamo = () => {
     }
   }, [location]);
 
-  const handleSearchChange = (e) => {
-    const value = e.target.value;
-    setSearch(value);
-    if (value.trim().length > 0) {
-      const filtered = books.filter(book =>
-        book.titulo.toLowerCase().startsWith(value.toLowerCase())
+  // Búsqueda en vivo
+  const handleSearchChange = e => {
+    const v = e.target.value;
+    setSearch(v);
+    if (v.trim()) {
+      setFilteredBooks(
+        books.filter(b =>
+          b.titulo.toLowerCase().startsWith(v.toLowerCase())
+        )
       );
-      setFilteredBooks(filtered);
     } else {
       setFilteredBooks([]);
       setSelectedBook(null);
     }
   };
-
-  const handleSelectBook = (book) => {
-    setSelectedBook(book);
+  const handleSelectBook = b => {
+    setSelectedBook(b);
     setFilteredBooks([]);
-    setSearch(book.titulo);
+    setSearch(b.titulo);
   };
 
-  const handleSubmit = async (e) => {
+  // Fechas helper
+  const hoy = () => new Date();
+  const todayStr = () => hoy().toISOString().split('T')[0];
+  const maxTwoMonths = () => {
+    const d = hoy();
+    d.setMonth(d.getMonth() + 2);
+    return d.toISOString().split('T')[0];
+  };
+
+  // Envío formulario
+  const handleSubmit = async e => {
     e.preventDefault();
-    if (!selectedBook || !matricula || !fechaDevolucion) {
-      alert('Por favor, completa todos los campos.');
-      return;
+    if (!selectedBook || !fechaDevolucion) {
+      return alert('Completa todos los campos.');
     }
     if (cantidadSolicitada > selectedBook.stock) {
-      alert('La cantidad solicitada supera la disponibilidad.');
-      return;
+      return alert('La cantidad supera disponibilidad.');
     }
 
-    const newLoan = {
-      fechaPrestamo: new Date().toISOString().split('T')[0],
+    // Verificar préstamo activo duplicado
+    try {
+      const r = await fetch(`${API}/prestamos/activo/${matricula}`);
+      if (r.ok) {
+        const activos = await r.json();
+        if (activos.some(p => p.ISBN === selectedBook.ISBN)) {
+          alert('Ya tienes este libro en préstamo.');
+          return navigate('/');
+        }
+      }
+    } catch {
+      // 404 = sin activos → OK
+    }
+
+    // Validar fecha devolución
+    if (
+      fechaDevolucion < todayStr() ||
+      fechaDevolucion > maxTwoMonths()
+    ) {
+      return alert('Fecha fuera de rango (este año y <2 meses).');
+    }
+
+    // Payload
+    const payload = {
+      fechaPrestamo: todayStr(),
       fechaDevolucion,
       matricula,
       ISBN: selectedBook.ISBN,
-      cantidad: cantidadSolicitada,
+      cantidad: cantidadSolicitada
     };
 
+    // Registrar
     try {
-      const response = await fetch('http://localhost:5000/prestamos', {
+      const res = await fetch(`${API}/prestamos`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newLoan),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        throw new Error(err?.error || 'Error al registrar préstamo');
+      }
+      // Actualizar stock UI
+      await fetch(`${API}/libros/${selectedBook.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ stock: selectedBook.stock - cantidadSolicitada })
       });
 
-      if (response.ok) {
-        // Actualizar stock del libro después de registrar el préstamo
-        const updatedBook = { ...selectedBook, stock: selectedBook.stock - cantidadSolicitada };
-        await fetch(`http://localhost:5000/libros/${selectedBook.id}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ stock: updatedBook.stock }),
-        });
-
-        alert('Préstamo registrado exitosamente.');
-        
-        // Redirige a la página de inicio después de la solicitud
-        navigate('/');  // Redirige a Home
-
-        // Resetear el formulario
-        setFechaDevolucion('');
-        setCantidadSolicitada(1);
-        setSelectedBook(null);
-        setSearch('');
-      } else {
-        alert('Error al registrar el préstamo. Por favor, intenta nuevamente.');
-      }
-    } catch (error) {
-      console.error('Error al conectar con el servidor:', error);
-      alert('Error al conectar con el servidor.');
+      alert('Préstamo registrado exitosamente.');
+      navigate('/');
+      // Reset
+      setFechaDevolucion('');
+      setCantidadSolicitada(1);
+      setSelectedBook(null);
+      setSearch('');
+    } catch (err) {
+      console.error('Error préstamo:', err);
+      alert(err.message);
     }
-  };
-
-  // Función para obtener la fecha actual en formato adecuado para el campo de fecha
-  const getTodayDate = () => {
-    const today = new Date();
-    const day = String(today.getDate()).padStart(2, '0');
-    const month = String(today.getMonth() + 1).padStart(2, '0'); // Los meses empiezan desde 0
-    const year = today.getFullYear();
-    return `${year}-${month}-${day}`;
   };
 
   return (
@@ -148,11 +154,24 @@ export const SolicitarPrestamo = () => {
     >
       <h2>Solicitar Préstamo</h2>
       <form className="solicitar-form" onSubmit={handleSubmit}>
+        {/* Matrícula */}
         <div className="form-group">
           <label>Matrícula del alumno:</label>
           <input type="text" value={matricula} disabled />
         </div>
 
+        {/* Buscar libro */}
+        <div className="form-group">
+          <label>Buscar libro:</label>
+          <input value={search} onChange={handleSearchChange} />
+          {filteredBooks.map(b => (
+            <div key={b.ISBN} onClick={() => handleSelectBook(b)}>
+              {b.titulo}
+            </div>
+          ))}
+        </div>
+
+        {/* Detalle libro */}
         {selectedBook && (
           <div className="book-detail">
             <div className="book-info">
@@ -162,21 +181,16 @@ export const SolicitarPrestamo = () => {
               <p><strong>Disponibles:</strong> {selectedBook.stock}</p>
               {selectedBook.imagen ? (
                 <img
-                  src={
-                    selectedBook.imagen.startsWith("http")
-                      ? selectedBook.imagen // Si la URL ya es completa, úsala directamente
-                      : `http://localhost:5000/uploads/${selectedBook.imagen}` // Construir la URL completa
-                  }
+                  src={selectedBook.imagen}
                   alt={`Imagen de ${selectedBook.titulo}`}
                   className="book-image"
                 />
-              ) : (
-                <p>No hay imagen disponible</p>
-              )}
+              ) : <p>No hay imagen disponible</p>}
             </div>
           </div>
         )}
 
+        {/* Cantidad */}
         {selectedBook && (
           <div className="form-group">
             <label>Cantidad a solicitar:</label>
@@ -185,20 +199,22 @@ export const SolicitarPrestamo = () => {
               min="1"
               max={selectedBook.stock}
               value={cantidadSolicitada}
-              onChange={(e) => setCantidadSolicitada(Number(e.target.value))}
+              onChange={e => setCantidadSolicitada(Number(e.target.value))}
               required
             />
           </div>
         )}
 
+        {/* Fecha devolución */}
         <div className="form-group">
           <label>Fecha de devolución:</label>
           <input
             type="date"
             value={fechaDevolucion}
-            onChange={(e) => setFechaDevolucion(e.target.value)}
+            onChange={e => setFechaDevolucion(e.target.value)}
             required
-            min={getTodayDate()} // Se asegura de que la fecha mínima sea la actual
+            min={todayStr()}
+            max={maxTwoMonths()}
           />
         </div>
 
